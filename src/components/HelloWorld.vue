@@ -1,6 +1,6 @@
 <template>
   <h1>{{ msg }}</h1>
-  <img src="../assets/logo.png" alt="" />
+  <img src="../assets/logo.png" alt="logo" />
   <button type="button" @click="count++">count is: {{ count }}</button>
 </template>
 
