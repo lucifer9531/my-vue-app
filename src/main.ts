@@ -2,16 +2,12 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
 
-let app;
-
-async function bootstrap(props: any = {}) {
-  const { container } = props;
-
-  app = createApp(App);
+async function bootstrap() {
+  const app = createApp(App);
 
   // TODO app 加强
 
-  app.mount(container || '#app');
+  app.mount('#app');
 }
 
 renderWithQiankun({
@@ -19,10 +15,7 @@ renderWithQiankun({
   mount() {
     bootstrap();
   },
-  unmount() {
-    app.unmount();
-    app = null;
-  },
+  unmount() {},
 });
 
 if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
