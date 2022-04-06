@@ -17,11 +17,5 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   fullPath?: string;
 }
 
-export interface MenuTag {
-  type?: 'primary' | 'error' | 'warn' | 'success';
-  content?: string;
-  dot?: boolean;
-}
-
 // export type AppRouteModule = RouteModule | AppRouteRecordRaw;
 export type AppRouteModule = AppRouteRecordRaw;

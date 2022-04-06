@@ -1,5 +1,21 @@
 <template>
-  <h1>我是主骨架</h1>
+  <Layout>
+    <LayoutContent />
+  </Layout>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import { Layout } from 'ant-design-vue';
+
+  import LayoutContent from './content/index.vue';
+
+  export default defineComponent({
+    name: 'DefaultLayout',
+    components: {
+      LayoutContent,
+      Layout,
+    },
+    setup() {},
+  });
+</script>
