@@ -1,5 +1,10 @@
 import { createApp } from 'vue';
 import App from './App.vue';
+import { setupStore } from '/@/store';
+import { setupGlobDirectives } from '/@/directives';
+import { setupErrorHandle } from '/@/logics/error-handle';
+import { setupRouter } from '/@/router';
+import { registerGlobComp } from '/@/components/registerGlobComp';
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
 
 let app;
@@ -7,7 +12,24 @@ async function bootstrap(props: any = {}) {
   const { container } = props;
   app = createApp(App);
 
-  // TODO app 加强
+  // Configure store
+  setupStore(app);
+
+  // TODO Initialize internal system configuration
+
+  // Register global components
+  registerGlobComp(app);
+
+  // Configure routing
+  setupRouter(app);
+
+  // TODO router-guard
+
+  // Register global directive
+  setupGlobDirectives(app);
+
+  // Configure global error handling
+  setupErrorHandle(app);
 
   app.mount(container || '#app');
 }
