@@ -1,9 +1,11 @@
-import type { UserInfo } from '/#/store';
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
+import { getAuthCache, setAuthCache } from '/@/utils/auth';
+import { TOKEN_KEY } from '/@/enums/cacheEnum';
+import { router } from '/@/router';
+import { PageEnum } from '/@/enums/pageEnum';
 
 interface UserState {
-  userInfo: Nullable<UserInfo>;
   token?: string;
   sessionTimeout?: boolean;
   lastUpdateTime: number;
@@ -12,8 +14,6 @@ interface UserState {
 export const useUserStore = defineStore({
   id: 'app-user',
   state: (): UserState => ({
-    // user info
-    userInfo: null,
     // token
     token: undefined,
     // Whether the login expired
@@ -22,11 +22,8 @@ export const useUserStore = defineStore({
     lastUpdateTime: 0,
   }),
   getters: {
-    getUserInfo(): any {
-      return this.userInfo || {};
-    },
     getToken(): string {
-      return this.token!;
+      return this.token || getAuthCache<string>(TOKEN_KEY);
     },
     getSessionTimeout(): boolean {
       return !!this.sessionTimeout;
@@ -38,34 +35,26 @@ export const useUserStore = defineStore({
   actions: {
     setToken(info: string | undefined) {
       this.token = info ? info : ''; // for null or undefined value
-      // TODO
-    },
-    setUserInfo(info: UserInfo | null) {
-      this.userInfo = info;
-      this.lastUpdateTime = new Date().getTime();
-      // TODO
+      setAuthCache(TOKEN_KEY, info);
     },
     setSessionTimeout(flag: boolean) {
       this.sessionTimeout = flag;
     },
     resetState() {
-      this.userInfo = null;
       this.token = '';
       this.sessionTimeout = false;
     },
     async logout(goLogin = false) {
       if (this.getToken) {
         try {
-          // TODO
+          // TODO 退出登陆实现
         } catch {
           console.log('注销Token失败');
         }
       }
       this.setToken(undefined);
       this.setSessionTimeout(false);
-      this.setUserInfo(null);
-      // TODO 返回登陆页
-      goLogin;
+      goLogin && router.push(PageEnum.BASE_LOGIN);
     },
   },
 });
