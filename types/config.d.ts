@@ -1,4 +1,5 @@
 import { RouterTransitionEnum, SessionTimeoutProcessingEnum } from '/@/enums/appEnum';
+import { CacheTypeEnum } from '/@/enums/cacheEnum';
 
 export interface TransitionSetting {
   //  Whether to open the page switching animation
@@ -33,6 +34,10 @@ export interface ProjectConfig {
   transitionSetting: TransitionSetting;
   // Multi-tab settings
   multiTabsSetting: MultiTabsSetting;
+  // Whether to cancel the http request that has been sent but not responded when switching the interface.
+  removeAllHttpPending: boolean;
+  // Whether to delete unclosed messages and notify when switching the interface
+  closeMessageOnSwitch: boolean;
 }
 
 export interface GlobConfig {

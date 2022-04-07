@@ -6,6 +6,7 @@ import { store } from '/@/store';
 import { PROJ_CFG_KEY } from '/@/enums/cacheEnum';
 import { Persistent } from '/@/utils/cache/persistent';
 import { deepMerge } from '/@/utils';
+import { resetRouter } from '/@/router';
 
 interface AppState {
   // project config
@@ -32,6 +33,10 @@ export const useAppStore = defineStore({
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       this.projectConfig = deepMerge(this.projectConfig || {}, config);
       Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
+    },
+    async resetAllState() {
+      resetRouter();
+      Persistent.clearAll();
     },
   },
 });

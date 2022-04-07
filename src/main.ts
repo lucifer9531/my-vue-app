@@ -4,7 +4,8 @@ import { initAppConfigStore } from '/@/logics/initAppConfig';
 import { setupStore } from '/@/store';
 import { setupGlobDirectives } from '/@/directives';
 import { setupErrorHandle } from '/@/logics/error-handle';
-import { setupRouter } from '/@/router';
+import { router, setupRouter } from '/@/router';
+import { setupRouterGuard } from '/@/router/guard';
 import { registerGlobComp } from '/@/components/registerGlobComp';
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
 
@@ -25,7 +26,8 @@ async function bootstrap(props: any = {}) {
   // Configure routing
   setupRouter(app);
 
-  // TODO router-guard
+  // router-guard
+  setupRouterGuard(router);
 
   // Register global directive
   setupGlobDirectives(app);

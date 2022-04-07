@@ -33,6 +33,13 @@ export const useMultipleTabStore = defineStore({
     },
   },
   actions: {
+    clearCacheTabs(): void {
+      this.cacheTabList = new Set();
+    },
+    resetState(): void {
+      this.tabList = [];
+      this.clearCacheTabs();
+    },
     /**
      * Update the cache according to the currently opened tabs
      */

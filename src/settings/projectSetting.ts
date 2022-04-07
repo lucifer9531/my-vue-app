@@ -47,6 +47,11 @@ const setting: ProjectConfig = {
 
   // Whether to enable KeepAlive cache is best to close during development, otherwise the cache needs to be cleared every time
   openKeepAlive: true,
+  // Whether to cancel the http request that has been sent but not responded when switching the interface.
+  // If it is enabled, I want to overwrite a single interface. Can be set in a separate interface
+  removeAllHttpPending: false,
+  // Whether to delete unclosed messages and notify when switching the interface
+  closeMessageOnSwitch: true,
 };
 
 export default setting;
