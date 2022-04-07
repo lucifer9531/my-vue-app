@@ -1,9 +1,9 @@
 {
-  "name": "sub-vue3",
+  "name": "geological-guarantee-web",
   "version": "1.0.0",
   "author": {
-    "name": "IRIS",
-    "email": "ruixijiejie@gmail.com"
+    "name": "baixuepeng",
+    "email": "baixuepeng@jylink.com"
   },
   "scripts": {
     "bootstrap": "yarn install",

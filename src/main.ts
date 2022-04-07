@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
+import { initAppConfigStore } from '/@/logics/initAppConfig';
 import { setupStore } from '/@/store';
 import { setupGlobDirectives } from '/@/directives';
 import { setupErrorHandle } from '/@/logics/error-handle';
@@ -15,7 +16,8 @@ async function bootstrap(props: any = {}) {
   // Configure store
   setupStore(app);
 
-  // TODO Initialize internal system configuration
+  // Initialize internal system configuration
+  initAppConfigStore();
 
   // Register global components
   registerGlobComp(app);

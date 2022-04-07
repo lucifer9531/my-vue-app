@@ -1,9 +1,38 @@
-import { SessionTimeoutProcessingEnum } from '/@/enums/appEnum';
+import { RouterTransitionEnum, SessionTimeoutProcessingEnum } from '/@/enums/appEnum';
+
+export interface TransitionSetting {
+  //  Whether to open the page switching animation
+  enable: boolean;
+  // Route basic switching animation
+  basicTransition: RouterTransitionEnum;
+  // Whether to open page switching loading
+  openPageLoading: boolean;
+  // Whether to open the top progress bar
+  openNProgress: boolean;
+}
+
+export interface MultiTabsSetting {
+  cache: boolean;
+  show: boolean;
+  showQuick: boolean;
+  canDrag: boolean;
+  showRedo: boolean;
+  showFold: boolean;
+}
 
 export interface ProjectConfig {
+  // Storage location of permission related information
+  permissionCacheType: CacheTypeEnum;
+  // Session timeout processing
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
-
+  // Use error-handler-plugin
   useErrorHandle: boolean;
+  // pageLayout whether to enable keep-alive
+  openKeepAlive: boolean;
+  // Animation configuration
+  transitionSetting: TransitionSetting;
+  // Multi-tab settings
+  multiTabsSetting: MultiTabsSetting;
 }
 
 export interface GlobConfig {
