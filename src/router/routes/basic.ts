@@ -12,7 +12,7 @@ export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
   name: PAGE_NOT_FOUND_NAME,
   component: LAYOUT,
   meta: {
-    title: 'ErrorPage',
+    title: '错误页',
     hideBreadcrumb: true,
     hideMenu: true,
   },
@@ -22,7 +22,7 @@ export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
       name: PAGE_NOT_FOUND_NAME,
       component: EXCEPTION_COMPONENT,
       meta: {
-        title: 'ErrorPage',
+        title: '错误页',
         hideBreadcrumb: true,
         hideMenu: true,
       },

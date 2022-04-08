@@ -17,22 +17,22 @@ const setting: ProjectConfig = {
   multiTabsSetting: {
     cache: false,
     // Turn on
-    show: false,
+    show: true,
     // Is it possible to drag and drop sorting tabs
     canDrag: true,
     // Turn on quick actions
-    showQuick: false,
+    showQuick: true,
     // Whether to show the refresh button
-    showRedo: false,
+    showRedo: true,
     // Whether to show the collapse button
-    showFold: false,
+    showFold: true,
   },
 
   // Transition Setting
   transitionSetting: {
     //  Whether to open the page switching animation
     // The disabled state will also disable pageLoading
-    enable: false,
+    enable: true,
 
     // Route basic switching animation
     basicTransition: RouterTransitionEnum.FADE_SIDE,

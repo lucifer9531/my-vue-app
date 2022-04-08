@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="getOpenPageLoading && getPageLoading">
     <PageLayout />
   </div>
 </template>
@@ -12,6 +12,11 @@
   import { useUserStore } from '/@/store/modules/user';
   import { useMultipleTabStore } from '/@/store/modules/multipleTab';
   import { router } from '/@/router';
+  import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
+  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
+
+  const { getOpenPageLoading } = useTransitionSetting();
+  const { getPageLoading } = useRootSetting();
 
   export default defineComponent({
     name: 'LayoutContent',
@@ -44,6 +49,11 @@
           tabStore.addTab(unref(route));
         }
       });
+
+      return {
+        getOpenPageLoading,
+        getPageLoading,
+      };
     },
   });
 </script>
