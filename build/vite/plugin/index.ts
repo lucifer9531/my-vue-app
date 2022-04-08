@@ -3,6 +3,8 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import legacy from '@vitejs/plugin-legacy';
 import purgeIcons from 'vite-plugin-purge-icons';
+import windiCSS from 'vite-plugin-windicss';
+import VitePluginCertificate from 'vite-plugin-mkcert';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import { configHtmlPlugin } from './html';
 import { configPwaConfig } from './pwa';
@@ -10,7 +12,6 @@ import { configCompressPlugin } from './compress';
 import { configStyleImportPlugin } from './styleImport';
 import { configVisualizerConfig } from './visualizer';
 import { configImageminPlugin } from './imagemin';
-import { configHmrPlugin } from './hmr';
 import { configQianKunPlugin } from './qiankun';
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
@@ -28,10 +29,13 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     vueJsx(),
     // support name
     vueSetupExtend(),
+    VitePluginCertificate({
+      source: 'coding',
+    }),
   ];
 
-  // TODO
-  !isBuild && vitePlugins.push(configHmrPlugin());
+  // vite-plugin-windicss
+  vitePlugins.push(windiCSS());
 
   // @vitejs/plugin-legacy
   VITE_LEGACY && isBuild && vitePlugins.push(legacy());
