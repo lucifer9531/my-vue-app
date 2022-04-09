@@ -41,6 +41,7 @@
     "path-to-regexp": "^6.2.0",
     "pinia": "2.0.12",
     "qs": "^6.10.3",
+    "redux": "^4.1.2",
     "resize-observer-polyfill": "^1.5.1",
     "vite-plugin-qiankun": "^1.0.11",
     "vue": "^3.2.31",
