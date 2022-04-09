@@ -12,10 +12,12 @@ import { router, setupRouter } from '/@/router';
 import { setupRouterGuard } from '/@/router/guard';
 import { registerGlobComp } from '/@/components/registerGlobComp';
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
+import SharedModule from '/@/shared';
 
 let app;
 async function bootstrap(props: any = {}) {
-  const { container } = props;
+  const { container, shared = SharedModule.getShared() } = props;
+
   app = createApp(App);
 
   // Configure store
@@ -39,6 +41,7 @@ async function bootstrap(props: any = {}) {
   // Configure global error handling
   setupErrorHandle(app);
 
+  SharedModule.overloadShared(shared);
   app.mount(container || '#app');
 }
 
