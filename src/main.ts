@@ -16,10 +16,8 @@ import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helpe
 import actions from '/@/shared/actions';
 
 let app;
-async function bootstrap(props: any = {}) {
-  const { container } = props;
-
-  if (props) actions.setActions(props);
+async function appRun(props?: any) {
+  qiankunWindow.__POWERED_BY_QIANKUN__ && props && actions.setActions(props);
 
   app = createApp(App);
 
@@ -44,13 +42,13 @@ async function bootstrap(props: any = {}) {
   // Configure global error handling
   setupErrorHandle(app);
 
-  app.mount(container || '#app');
+  app.mount(props?.container || '#app');
 }
 
 renderWithQiankun({
   bootstrap() {},
   mount(props) {
-    bootstrap(props);
+    appRun(props);
   },
   unmount() {
     app.unmount();
@@ -59,5 +57,5 @@ renderWithQiankun({
 });
 
 if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
-  bootstrap();
+  appRun();
 }
