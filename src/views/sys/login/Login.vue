@@ -26,8 +26,7 @@
   </section>
 </template>
 <script lang="ts">
-  // 引入 SharedModule
-  import SharedModule from '/@/shared';
+  import actions from '/@/shared/actions';
   import { onMounted, reactive, toRefs } from 'vue';
 
   export default {
@@ -39,15 +38,15 @@
       });
 
       onMounted(() => {
-        const shared = SharedModule.getShared();
-
-        // 使用 shared 获取 token
-        const token = shared.getToken();
-        if (!token) {
-          alert('未检测到登录信息!');
-          return;
-        }
-        getUserInfo(token);
+        actions.onGlobalStateChange((state) => {
+          const { token } = state;
+          if (!token) {
+            console.error('未监测到登陆信息');
+            return;
+          }
+          // 获取用户信息
+          getUserInfo(token);
+        }, true);
       });
 
       const getUserInfo = async (token: string) => {

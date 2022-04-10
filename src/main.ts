@@ -12,11 +12,13 @@ import { router, setupRouter } from '/@/router';
 import { setupRouterGuard } from '/@/router/guard';
 import { registerGlobComp } from '/@/components/registerGlobComp';
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
-import SharedModule from '/@/shared';
+import actions from '/@/shared/actions';
 
 let app;
 async function bootstrap(props: any = {}) {
-  const { container, shared = SharedModule.getShared() } = props;
+  const { container } = props;
+
+  if (props) actions.setActions(props);
 
   app = createApp(App);
 
@@ -41,14 +43,13 @@ async function bootstrap(props: any = {}) {
   // Configure global error handling
   setupErrorHandle(app);
 
-  SharedModule.overloadShared(shared);
   app.mount(container || '#app');
 }
 
 renderWithQiankun({
   bootstrap() {},
-  mount() {
-    bootstrap();
+  mount(props) {
+    bootstrap(props);
   },
   unmount() {
     app.unmount();
