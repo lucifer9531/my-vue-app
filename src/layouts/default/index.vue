@@ -1,6 +1,8 @@
 <template>
-  <Layout>
-    <LayoutContent />
+  <Layout class="default-layout">
+    <Layout class="default-layout-main">
+      <LayoutContent />
+    </Layout>
   </Layout>
 </template>
 
@@ -19,3 +21,22 @@
     setup() {},
   });
 </script>
+
+<style lang="less">
+  .default-layout {
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+    background-color: #f9f4f6;
+    flex-direction: column;
+
+    > .ant-layout {
+      min-height: 100%;
+    }
+
+    &-main {
+      width: 100%;
+      margin-left: 1px;
+    }
+  }
+</style>

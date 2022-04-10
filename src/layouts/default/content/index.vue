@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="getOpenPageLoading && getPageLoading">
+  <div class="layout-content" v-loading="getOpenPageLoading && getPageLoading">
     <PageLayout />
   </div>
 </template>
@@ -57,3 +57,22 @@
     },
   });
 </script>
+
+<style lang="less">
+  .layout-content {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+
+    &.fixed {
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+    &-loading {
+      position: absolute;
+      top: 200px;
+      z-index: 10000;
+    }
+  }
+</style>
