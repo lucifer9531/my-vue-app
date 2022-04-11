@@ -52,7 +52,7 @@
         if (!unref(getOpenKeepAlive)) {
           return [];
         }
-        // TODO 手动设置需要缓存的路由名称
+        // TODO 可手动设置需要缓存的路由名称
         return tabStore.getCachedTabList;
       });
 

@@ -22,7 +22,7 @@
   });
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .default-layout {
     display: flex;
     width: 100%;

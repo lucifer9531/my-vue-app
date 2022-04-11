@@ -128,12 +128,11 @@
   });
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .app-exception-page {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 100px;
 
     .ant-result-icon {
       img {
