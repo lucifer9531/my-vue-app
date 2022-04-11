@@ -14,7 +14,7 @@ Object.keys(modules).forEach((key) => {
   routeModuleList.push(...modList);
 });
 
-export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList];
+export const asyncRoutes = routeModuleList;
 
 export const RootRoute: AppRouteRecordRaw = {
   path: '/',
@@ -35,4 +35,10 @@ export const LoginRoute: AppRouteRecordRaw = {
 };
 
 // Basic routing without permission
-export const basicRoutes = [LoginRoute, RootRoute, REDIRECT_ROUTE, PAGE_NOT_FOUND_ROUTE];
+export const basicRoutes = [
+  LoginRoute,
+  RootRoute,
+  REDIRECT_ROUTE,
+  PAGE_NOT_FOUND_ROUTE,
+  ...asyncRoutes,
+];
