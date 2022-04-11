@@ -40,6 +40,7 @@
   import { useUserStore } from '/@/store/modules/user';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { buildUUID } from '/@/utils/uuid';
+  // import { encrypt } from "/@/utils/rsaEncrypt";
 
   const { notification, createErrorModal } = useMessage();
 

@@ -215,7 +215,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 需要对返回数据进行处理
           isTransformResponse: false,
           // post请求的时候添加参数到url
-          joinParamsToUrl: true,
+          joinParamsToUrl: false,
           // 格式化提交参数时间
           formatDate: true,
           // 消息提示类型
