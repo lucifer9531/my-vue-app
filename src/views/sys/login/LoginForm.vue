@@ -33,14 +33,13 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, ref, toRaw } from 'vue';
+  import { reactive, ref } from 'vue';
   import { Form, Input, Button } from 'ant-design-vue';
 
   import { useFormRules, useFormValid } from './useLogin';
   import { useUserStore } from '/@/store/modules/user';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { buildUUID } from '/@/utils/uuid';
-  // import { encrypt } from "/@/utils/rsaEncrypt";
+  import { encrypt } from '/@/utils/rsaEncrypt';
 
   const { notification, createErrorModal } = useMessage();
 
@@ -53,13 +52,7 @@
 
   const formData = reactive({
     username: 'superadmin',
-    password:
-      'KOjVi2LOfzVynbLoI9//l3WXIJ3NzyG6dG32BWFfuEEu0lCtl4wtBsD3zFqpvHuMozgYMNcYAQyJnqj0DpOVqYZAt75h36GmsvGDYwedclwKQLgq1KXCgiIZ8Pau+HK2rLrPRFq/F8BExaTZ1vOZzfk49zcxgZf88itF/du/NwM=',
-    randomStr: buildUUID(),
-    code: '',
-    grant_type: 'password',
-    scope: 'server',
-    encrypt: 'RSA',
+    password: 'Qcode@123',
   });
 
   const { getFormRules } = useFormRules();
@@ -71,7 +64,11 @@
     if (!data) return;
     try {
       loading.value = true;
-      const loginInfo = await userStore.login(toRaw(formData));
+      await userStore.getRsaPublicKey();
+      const loginInfo = await userStore.login({
+        username: data.username,
+        password: encrypt(userStore.getPublicKey, data.password),
+      });
       if (loginInfo) {
         notification.success({
           message: '登录成功',
@@ -80,6 +77,7 @@
         });
       }
     } catch (error) {
+      console.log(error);
       createErrorModal({
         title: '错误提示',
         content: (error as unknown as Error).message || '网络异常，请检查您的网络连接是否正常!',

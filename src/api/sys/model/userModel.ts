@@ -4,11 +4,6 @@
 export interface LoginParams {
   username: string;
   password: string;
-  randomStr?: string;
-  code?: string;
-  grant_type?: string;
-  scope?: string;
-  encrypt?: string;
 }
 
 export interface LoginResultModel {

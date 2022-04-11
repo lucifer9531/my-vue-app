@@ -7,10 +7,11 @@ import { TOKEN_KEY } from '/@/enums/cacheEnum';
 import { router } from '/@/router';
 import { PageEnum } from '/@/enums/pageEnum';
 import { LoginParams, LoginResultModel } from '/@/api/sys/model/userModel';
-import { loginApi } from '/@/api/sys/user';
+import { loginApi, rsaApi } from '/@/api/sys/user';
 
 interface UserState {
   token?: string;
+  publicKey?: string;
 }
 
 export const useUserStore = defineStore({
@@ -18,10 +19,14 @@ export const useUserStore = defineStore({
   state: (): UserState => ({
     // token
     token: undefined,
+    publicKey: undefined,
   }),
   getters: {
     getToken(): string {
       return this.token || getAuthCache<string>(TOKEN_KEY);
+    },
+    getPublicKey(): string {
+      return this.publicKey!;
     },
   },
   actions: {
@@ -29,8 +34,19 @@ export const useUserStore = defineStore({
       this.token = info ? info : ''; // for null or undefined value
       setAuthCache(TOKEN_KEY, info);
     },
+    setPublicKey(info: string | undefined) {
+      this.publicKey = info ? info : '';
+    },
     resetState() {
       this.token = '';
+    },
+    async getRsaPublicKey(): Promise<void> {
+      try {
+        const publicKey = await rsaApi();
+        this.setPublicKey(publicKey);
+      } catch (error) {
+        return Promise.reject(error);
+      }
     },
     async login(
       params: LoginParams & {
